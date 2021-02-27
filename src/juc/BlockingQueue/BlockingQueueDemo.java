@@ -1,4 +1,4 @@
-package juc;
+package juc.BlockingQueue;
 
 import java.io.Serializable;
 import java.util.AbstractQueue;
@@ -55,7 +55,16 @@ public class BlockingQueueDemo<E> extends AbstractQueue<E> implements BlockingQu
 
     @Override
     public void put(E e) throws InterruptedException {
-
+        checkNotNull(e);
+        final ReentrantLock lock = this.lock;
+        lock.lockInterruptibly();
+        try {
+            while (count == items.length)
+                notFull.await();
+            enqueue(e);
+        } finally {
+            lock.unlock();
+        }
     }
 
     @Override
@@ -84,10 +93,13 @@ public class BlockingQueueDemo<E> extends AbstractQueue<E> implements BlockingQu
     @Override
     public E take() throws InterruptedException {
         final ReentrantLock lock = this.lock;
+        //此方法如果当前线程已经interrupted的话，直接返回InterruptedException错误
         lock.lockInterruptibly();
         try {
-            while (count == 0)
+            while (count == 0) {
+                System.out.println("taketaketake");
                 notEmpty.await();
+            }
             return dequeue();
         } finally {
             lock.unlock();
@@ -106,12 +118,50 @@ public class BlockingQueueDemo<E> extends AbstractQueue<E> implements BlockingQu
 
     @Override
     public int drainTo(Collection<? super E> c) {
-        return 0;
+        return drainTo(c, Integer.MAX_VALUE);
     }
 
     @Override
     public int drainTo(Collection<? super E> c, int maxElements) {
-        return 0;
+        checkNotNull(c);
+        if (c == this)
+            throw new IllegalArgumentException();
+        if (maxElements <= 0)
+            return 0;
+        final Object[] items = this.items;
+        final ReentrantLock lock = this.lock;
+        lock.lock();
+        try {
+            int n = Math.min(maxElements, count);
+            int take = takeIndex;
+            int i = 0;
+            try {
+                while (i < n) {
+                    E x = (E) items[take];
+                    c.add(x);
+                    items[take] = null;
+                    if (++take == items.length)
+                        take = 0;
+                    i++;
+                }
+                return n;
+            }finally {
+                if (i>0){
+                    count-=i;
+                    takeIndex=take;
+//                    if (itrs != null) {
+//                        if (count == 0)
+//                            itrs.queueIsEmpty();
+//                        else if (i > take)
+//                            itrs.takeIndexWrapped();
+//                    }
+//                    for (; i > 0 && lock.hasWaiters(notFull); i--)
+//                        notFull.signal();
+                }
+            }
+        }finally {
+            lock.unlock();
+        }
     }
 
     @Override
@@ -146,7 +196,13 @@ public class BlockingQueueDemo<E> extends AbstractQueue<E> implements BlockingQu
 
     @Override
     public E peek() {
-        return null;
+        final ReentrantLock lock = this.lock;
+        lock.lock();
+        try {
+            return itemAt(takeIndex); // null when queue is empty
+        } finally {
+            lock.unlock();
+        }
     }
 
 
@@ -155,10 +211,6 @@ public class BlockingQueueDemo<E> extends AbstractQueue<E> implements BlockingQu
         return super.add(e);
     }
 
-    @Override
-    public E remove() {
-        return super.remove();
-    }
 
     @Override
     public E element() {
@@ -187,7 +239,23 @@ public class BlockingQueueDemo<E> extends AbstractQueue<E> implements BlockingQu
 
     @Override
     public Object[] toArray() {
-        return super.toArray();
+        Object[] a;
+        final ReentrantLock lock = this.lock;
+        lock.lock();
+        try {
+            final int count = this.count;
+            a = new Object[count];
+            int n = items.length - takeIndex;
+            if (count <= n)
+                System.arraycopy(items, takeIndex, a, 0, count);
+            else {
+                System.arraycopy(items, takeIndex, a, 0, n);
+                System.arraycopy(items, 0, a, n, count - n);
+            }
+        } finally {
+            lock.unlock();
+        }
+        return a;
     }
 
     @Override
@@ -272,5 +340,9 @@ public class BlockingQueueDemo<E> extends AbstractQueue<E> implements BlockingQu
 //            itrs.elementDequeued();
         notFull.signal();
         return x;
+    }
+
+    final E itemAt(int i) {
+        return (E) items[i];
     }
 }

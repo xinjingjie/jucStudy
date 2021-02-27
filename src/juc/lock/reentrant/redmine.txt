@@ -33,3 +33,20 @@ synchronized 也属于非公平锁
  自旋锁（spin lock）是一种非阻塞锁，也就是说，如果某线程需要获取锁，但该锁已经被其他线程占用时，该线程不会被挂起，而是在不断的消耗CPU的时间，不停的试图获取锁。
 
 互斥量（mutex）是阻塞锁，当某线程无法获取锁时，该线程会被直接挂起，该线程不再消耗CPU时间，当其他线程释放锁后，操作系统会激活那个被挂起的线程，让其投入运行
+
+
+
+
+
+lock 与 lockInterruptibly比较区别在于：
+lock 优先考虑获取锁，待获取锁成功后，才响应中断。
+lockInterruptibly 优先考虑响应中断，而不是响应锁的普通获取或重入获取。
+
+详细区别：
+ReentrantLock.lockInterruptibly允许在等待时由其它线程调用等待线程的Thread.interrupt方法来中断等待线程的等待而直接返回，这时不用获取锁，而会抛出一个InterruptedException。 ReentrantLock.lock方法不允许Thread.interrupt中断,即使检测到Thread.isInterrupted,一样会继续尝试获取锁，失败则继续休眠。只是在最后获取锁成功后再把当前线程置为interrupted状态,然后再中断线程。
+————————————————
+版权声明：本文为CSDN博主「yyd19921214」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/yyd19921214/article/details/49737061
+
+
+AbstractQueuedSynchronizer中有一个属性state，为0时表示没有线程持有锁，大于0时表示有锁。

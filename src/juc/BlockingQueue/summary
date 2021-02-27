@@ -1,0 +1,48 @@
+offer   boolean
+        提供一个值，
+        队列不满可以加入则加入，返回true    lock.lockInterruptibly();
+        不加入则返回false
+
+put    void
+       提供一个值，
+       队列不满时入队,否则阻塞               lock.lockInterruptibly
+
+add     boolean
+        添加元素 队列满的话返回IllegalStateException错误
+
+poll    E
+        获取并移除队列头部的元素,仅在获取锁的时候执行
+        无元素时候返回null。
+
+
+take    E
+        获取并移除队列头部的元素，无元素时候阻塞等待。   lock.lockInterruptibly();
+
+
+peek   E
+       获取对列头部的元素，队列无元素时返回null
+
+
+remove E 删除头部元素并返回,如果没有元素则抛出NoSuchElementException错误
+
+
+drainTo   int
+
+poll -->【若队列为空，返回null】
+
+remove >【若队列为空，抛出NoSuchElementException异常】
+
+take -->【若队列为空，发生阻塞，等待有元素】
+
+
+
+
+offer 不会阻塞，返回true or false
+add   void 添加元素，队列满抛出异常
+put   放入一个元素，队列满时阻塞
+
+
+poll    拿出并删除，队列为空时返回null
+peek    取出第一个元素，队列为空时返回null
+take    拿出，不然阻塞
+remove  拿出，不然抛出错误
