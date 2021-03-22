@@ -13,6 +13,7 @@ public class FutureThreadDemo {
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         System.out.println(Runtime.getRuntime().availableProcessors());
         ExecutorService executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
+
         List<FutureTask<Integer>> futureTaskList = new ArrayList<FutureTask<Integer>>();
         for(int i = 0;i < 10 ;i ++){
             final int index = i;

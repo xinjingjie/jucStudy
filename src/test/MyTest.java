@@ -1,5 +1,8 @@
 package test;
 
+import org.junit.Test;
+import sun.misc.Unsafe;
+
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -29,5 +32,10 @@ public class MyTest {
 //        } finally {
 //            lock.unlock();
 //        }
+    }
+
+    @Test(expected = SecurityException.class)
+    public void testSingletonGetter() throws Exception {
+        Unsafe.getUnsafe();
     }
 }
