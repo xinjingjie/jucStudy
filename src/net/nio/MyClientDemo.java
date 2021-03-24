@@ -8,7 +8,7 @@ import java.nio.ByteBuffer;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.SocketChannel;
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
 
 /**
@@ -56,7 +56,7 @@ public class MyClientDemo {
         SocketChannel socketChannel = (SocketChannel) key.channel();
         socketChannel.read(receiveBuffer);
         receiveBuffer.flip();
-        String receiveData = Charset.forName("UTF-8").decode(receiveBuffer).toString();
+        String receiveData = StandardCharsets.UTF_8.decode(receiveBuffer).toString();
         System.out.println("server: " + receiveData);
         receiveBuffer.clear();
     }

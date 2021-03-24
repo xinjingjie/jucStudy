@@ -70,10 +70,6 @@ public class MyServerDemo {
                         String receiveData = StandardCharsets.UTF_8.decode(readBuffer).toString();
                         System.out.println(receiveData);
                         if ("who am i".equals(receiveData)) {
-//                            writeBuffer.clear();
-//                            writeBuffer.put(("you are " + channel.getRemoteAddress()).getBytes());
-//                            writeBuffer.flip();
-//                            channel.write(writeBuffer);
                             selectionKey.attach("you are " + channel.getRemoteAddress());
                         }
                     }
