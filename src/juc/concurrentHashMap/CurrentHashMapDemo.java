@@ -1,9 +1,8 @@
-package juc.currentHashMap;
+package juc.concurrentHashMap;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 
 import static com.sun.xml.internal.fastinfoset.util.ValueArray.MAXIMUM_CAPACITY;
 

@@ -1,4 +1,4 @@
-package understand.responseibility;
+package designpattern.responseibility;
 
 /**
  * @Author： xinjingjie

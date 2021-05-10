@@ -1,0 +1,1 @@
+获取该包下的所有类,然后根据注解去判断，放到类似BeanFactory的一个ConcurrentHashMap---beans里类和实例

@@ -1,4 +1,4 @@
-package understand.responseibility;
+package designpattern.responseibility;
 
 import java.util.ArrayList;
 import java.util.List;

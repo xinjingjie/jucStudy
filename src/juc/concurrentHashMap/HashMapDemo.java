@@ -1,14 +1,8 @@
-package juc.currentHashMap;
+package juc.concurrentHashMap;
 
 
-import juc.BlockingQueue.Test;
-
-import java.io.InputStream;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
-import java.util.Scanner;
-import java.util.concurrent.CountDownLatch;
 
 /**
  * @Author： xinjingjie

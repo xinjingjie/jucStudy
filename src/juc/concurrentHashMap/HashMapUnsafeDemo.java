@@ -1,4 +1,4 @@
-package juc.currentHashMap;
+package juc.concurrentHashMap;
 
 import java.util.HashMap;
 import java.util.Map;
