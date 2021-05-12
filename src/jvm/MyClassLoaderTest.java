@@ -8,17 +8,24 @@ import java.lang.reflect.Method;
  * @Date：2021/5/8 14:42
  **/
 public class MyClassLoaderTest {
-    public static void main(String args[]) throws Exception {
+    public static void main(String[] args) throws Exception {
         MyClassLoader classLoader = new MyClassLoader("E:/zxy/com/xinjingjie");
         Class clazz = classLoader.loadClass("jvm.User1");
         Object obj = clazz.newInstance();
         Method method = clazz.getDeclaredMethod("say", null);
         method.invoke(obj, null);
-        System.out.println(clazz.getClassLoader().getClass().getName());
+        System.out.println(clazz.getClassLoader());
+
+        MyClassLoader classLoader2 = new MyClassLoader("E:/zxy/com/xinjingjie");
+        Class clazz2 = classLoader2.loadClass("jvm.User1");
+        Object obj2 = clazz2.newInstance();
+        Method method2 = clazz2.getDeclaredMethod("say", null);
+        method2.invoke(obj2, null);
+        System.out.println(clazz2.getClassLoader());
     }
 
     static class MyClassLoader extends ClassLoader {
-        private String classPath;
+        private final String classPath;
 
         public MyClassLoader(String classPath) {
             this.classPath = classPath;
