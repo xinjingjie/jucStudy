@@ -1,4 +1,4 @@
-package algorithm;
+package demo;
 
 /**
  * @Author： xinjingjie
@@ -8,7 +8,7 @@ package algorithm;
 public class FoobarDemo {
     private static volatile int number = 0;
     final Object monitor = new Object();
-    private int n;
+    private final int n;
 
     public FoobarDemo(int n) {
         this.n = n;

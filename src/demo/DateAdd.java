@@ -1,4 +1,4 @@
-package algorithm;
+package demo;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
