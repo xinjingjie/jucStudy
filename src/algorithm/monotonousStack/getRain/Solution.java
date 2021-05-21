@@ -1,4 +1,4 @@
-package algorithm.getRain;
+package algorithm.monotonousStack.getRain;
 
 import java.util.Deque;
 import java.util.LinkedList;
@@ -23,7 +23,7 @@ public class Solution {
     }
 
     public static int trap(int[] height) {
-        if (height.length == 0){
+        if (height.length == 0) {
             return 0;
         }
         /*
@@ -136,7 +136,7 @@ public class Solution {
                     stack.push(k);
                 }
             }
-        }else{
+        } else {
             for (; start >= end; start--) {
                 int k = height[start];
                 if (isZero) {

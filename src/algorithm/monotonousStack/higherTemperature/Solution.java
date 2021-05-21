@@ -1,4 +1,4 @@
-package algorithm.higherTemperature;
+package algorithm.monotonousStack.higherTemperature;
 
 import java.util.Arrays;
 import java.util.Deque;
