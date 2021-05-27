@@ -22,7 +22,7 @@ public class Solution {
 
         ArrayList<String> aList2 = new ArrayList<>(Arrays.asList(s2));
         ArrayList<String> aList4 = new ArrayList(Collections.singletonList(s2));
-//        List<K> authcChannels = Stream.of(K).collect(Collectors.toList());
+//        List<K> authcChannels = stream.Stream.of(K).collect(Collectors.toList());
 
 //        for (String i:aList){
 //            System.out.println(i);

@@ -4,6 +4,8 @@
     <exclude-output />
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib" isTestSource="false" />
+      <excludeFolder url="file://$MODULE_DIR$/lib" />
     </content>
     <content url="file://$MODULE_DIR$/../../zxy/com/xinjingjie/jvm" />
     <orderEntry type="inheritedJdk" />

@@ -103,7 +103,7 @@ public class ArrayCastToListDemo {
             System.out.println(i);
         }
 
-        System.out.println("Stream.of(xxxx).collect(Collectors.toList())方法测试");
+        System.out.println("stream.Stream.of(xxxx).collect(Collectors.toList())方法测试");
         List charList = Stream.of(chars).collect(Collectors.toList());
         List intList = Stream.of(ints).collect(Collectors.toList());
         List integerList = Stream.of(nums).collect(Collectors.toList());
