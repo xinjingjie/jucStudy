@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ReadParameterReplyMessage>
+    <header>
+        <verb>reply</verb>
+        <noun>ReadParameter</noun>
+        <revision>inner</revision>
+        <dateTime>2021-03-30 10:49:18</dateTime>
+        <source>web client</source>
+        <messageID>466373</messageID>
+        <asyncReplyTo></asyncReplyTo>
+    </header>
+    <reply>
+        <replyCode>0</replyCode>
+        <replyText>Success</replyText>
+        <packetText></packetText>
+        <protocol>
+            <protocolType>03</protocolType>
+            <data>
+                <deviceId>100020</deviceId>
+                <deviceType>meter</deviceType>
+                <dataItem>
+                    <dataType>46010005</dataType>
+                    <value/>
+                </dataItem>
+            </data>
+        </protocol>
+    </reply>
+    <payload/>
+</ReadParameterReplyMessage>

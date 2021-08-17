@@ -19,11 +19,13 @@ public class ForkJoinDemo {
         System.out.println(Runtime.getRuntime().availableProcessors());
 
         Instant start2 = Instant.now();
-        long result2 = LongStream.rangeClosed(0, 10000000L).parallel().reduce(1, (left, right) -> left + right);
-        long result3 = LongStream.rangeClosed(0, 10000000L).parallel().reduce(1, Long::sum);
+        long result2 = LongStream.rangeClosed(0, 10000000L).parallel().reduce(0, (left, right) -> left + right);
+//        long result3 = LongStream.rangeClosed(0, 10000000L).parallel().reduce(1, Long::sum);
         Instant end2 = Instant.now();
         System.out.println("耗时：" + Duration.between(start2, end2).toMillis() + "ms");
         System.out.println("结果为：" + result2);
+
+
     }
 
     public static long ttt(int x) {
